@@ -84,3 +84,9 @@ python main.py
 ```
 
 Navigate to `http://127.0.0.1:80` in your web browser.
+
+## Screenshots
+
+<img width="500" height="234" alt="Screenshot 2025-01-17 070708" src="https://github.com/user-attachments/assets/7a98775b-4b65-484a-9e44-e61e0e8a4bc6" />
+<img width="500" height="237" alt="Screenshot 2025-01-13 011248" src="https://github.com/user-attachments/assets/a54c5e92-39b0-4aca-a191-9a20c37ea928" />
+
