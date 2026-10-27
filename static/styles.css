@@ -1,0 +1,515 @@
+/* Variables for web page like animation time, variables for RTL languages and color variables */
+:root {
+    --time: .4s;
+    --australia: 0deg;
+    --arabic: 1;
+    --bgColor: #222222;
+    --txtColor: #DDDDDD;
+    --btnColor: #444444;
+    --settingsHover: #474747;
+    --btnHover: #696969;
+    --placeholderColor: #AAAAAA;
+    --dropdownColor: #555555;
+    --txtInputBgColor: #DDDDDD;
+    --txtInputColor: #444444;
+}
+
+/* Rotates or flips web page depending on language */
+html {
+    transform: rotate(var(--australia)) scaleX(var(--arabic));
+}
+
+/* Entire web page, set BG color + no scroll */
+html, body {
+    height: 100%;
+    margin: 0px;
+    padding: 0px;
+    overflow: hidden;
+    background-color: var(--bgColor);
+    user-select: none;
+}
+
+/* Upper part of GUI, reserved for titles and big text */
+#title {
+    height: 50%;
+    padding-bottom: 28px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+#header {
+    height: 80px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+#gameArea {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 50px;
+}
+
+#game {
+    height: calc(100vh - 80px);
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: center;
+}
+
+#gameInfo {
+    width: 400px;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: start;
+    border-radius: 20px;
+    background-color: var(--btnColor);
+}
+
+/* Settings button, sets size and position */
+#settings {
+    width: 80px;
+    height: 80px;
+    margin: 20px;
+    margin-bottom: auto;
+    align-self: flex-end;
+    border-radius: 100%;
+    background-color: var(--bgColor);
+    border-color: var(--txtColor);
+    border-width: 5px;
+    border-style: solid;
+}
+
+/* Changes color of settings when mouse hovers over it */
+#settings:hover {
+    background-color: var(--settingsHover);
+    cursor: pointer;
+}
+
+/* Settings icon */
+#settings svg {
+    width: 40px;
+    height: 40px;
+    fill: var(--txtColor);
+}
+
+/* Titles, sets font and size */
+#title h1 {
+    margin: 0px;
+    font-size: 4.8rem;
+    font-family: Arial, Helvetica, sans-serif;
+    transform: scaleX(var(--arabic));
+    color: var(--txtColor);
+}
+
+#header h1 {
+    margin: 0px;
+    font-size: 3.6rem;
+    margin-right: auto;
+    margin-top: 20px;
+    margin-left: 20px;
+    font-family: Arial, Helvetica, sans-serif;
+    transform: scaleX(var(--arabic));
+    color: var(--txtColor);
+}
+
+#gameInfo h1 {
+    margin: 0px;
+    font-size: 2.4rem;
+    margin-block: 20px;
+    margin-left: 20px;
+    font-family: Arial, Helvetica, sans-serif;
+    transform: scaleX(var(--arabic));
+    color: var(--txtColor);
+}
+
+#gameInfo h2 {
+    margin: 0px;
+    font-size: 1.5rem;
+    margin-left: 20px;
+    margin-bottom: 5px;
+    font-family: Arial, Helvetica, sans-serif;
+    transform: scaleX(var(--arabic));
+    color: var(--txtColor);
+}
+
+#gameInfo #gameInfoTurn {
+    margin-top: auto;
+    margin-bottom: 15px;
+}
+
+#gameInfo button {
+    margin-inline: 20px;
+    margin-bottom: 15px;
+    width: calc(100% - 40px);
+    height: 67px;
+    border-width: 0px;
+    border-radius: 10px;
+    font-size: 1.8rem;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    transform: scaleX(var(--arabic));
+    background-color: var(--dropdownColor);
+    color: var(--txtColor);
+}
+
+#gameInfo button:hover {
+    background-color: var(--btnHover);
+    cursor: pointer;
+}
+
+#game p {
+    margin: 0px;
+    margin-block: 10px;
+    font-size: 2rem;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    transform: scaleX(var(--arabic));
+    color: var(--txtColor);
+}
+
+/* Bottom half of GUI, reserved for buttons and text input */
+#buttons {
+    height: calc(50% - 28px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 25px;
+}
+
+/* Input elements, sets size and font */
+.button, .text {
+    width: 330px;
+    height: 67px;
+    border-width: 0px;
+    border-radius: 10px;
+    font-size: 2rem;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    transform: scaleX(var(--arabic));
+}
+
+/* Button elements, sets colors */
+.button {
+    background-color: var(--btnColor);
+    color: var(--txtColor);
+}
+
+/* Back button, sets size and position */
+#back {
+    display: none;
+    width: 120px;
+    margin: 20px;
+    margin-top: auto;
+    align-self: start;
+}
+
+/* Animation for when an error pops up */
+@keyframes errorAppear {
+    from {transform: translateY(20vh);visibility:hidden;}
+    to {transform: translateY(0px);visibility:visible;}
+}
+
+@keyframes errorDisappear {
+    from {transform: translateY(0px);visibility:visible;}
+    to {transform: translateY(20vh);visibility:hidden;}
+}
+
+.errorAppear {
+    animation-name: errorAppear;
+    animation-duration: var(--time);
+}
+
+.errorDisappear {
+    animation-name: errorDisappear;
+    animation-duration: var(--time);
+}
+
+/* Error banner element, sets color and position */
+#errorBanner {
+    position: fixed;
+    bottom: 0px;
+    background-color: red;
+    padding: 20px;
+    width: 100%;
+    transform: translateY(20vh);
+    visibility: hidden;
+}
+
+/* Error banner text element, sets font, size, color */
+#errorText {
+    color: white;
+    display: inline-block;
+    margin: 0px;
+    padding-inline: 20px;
+    font-size: 2rem;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    transform: scaleX(var(--arabic));
+}
+
+/* Changes color of back button when mouse hovers over it */
+.button:hover {
+    background-color: var(--btnHover);
+    cursor: pointer;
+}
+
+/* Text input elements, sets colors */
+.text {
+    background-color: var(--txtInputBgColor);
+    color: var(--txtInputColor);
+    text-align: center;
+}
+
+/* Placeholder text of text input elements, sets colors */
+::placeholder {
+    color: var(--placeholderColor);
+    opacity: 1;
+}
+
+/* Settings popup container, covers whole screen */
+#modal {
+    display: flex;
+    visibility: hidden;
+    position: fixed;
+    transform: translateY(-100vh);
+    width: 100%;
+    height: 100%;
+    top: 0px;
+    left: 0px;
+    background-color: rgba(0,0,0,0);
+}
+
+/* Animation for when a modal appears and disappears */
+@keyframes modalAppear {
+    from {transform: translateY(-100vh);visibility:hidden;}
+    to {transform: translateY(0px);visibility:visible;}
+}
+
+@keyframes modalDisappear {
+    from {transform: translateY(0px);visibility:visible;}
+    to {transform: translateY(-100vh);visibility:hidden;}
+}
+
+.modalAppear {
+    animation-name: modalAppear;
+    animation-duration: var(--time);
+}
+
+.modalDisappear {
+    animation-name: modalDisappear;
+    animation-duration: var(--time);
+}
+
+/* Settings popup, sets size, position and color */
+#modalContent {
+    width: min(60%, 600px);
+    height: 60%;
+    margin: auto;
+    padding: 30px 50px;
+    border-radius: 20px;
+    background-color: var(--btnColor);
+}
+
+/* Elements within settings popup, sets font and color */
+#modalContent #close, #modalContent h1, #modalContent h2 {
+    font-family: Arial, Helvetica, sans-serif;
+    color: var(--txtColor);
+    transform: scaleX(var(--arabic));
+}
+
+/* Close button, sets position */
+#modalContent #close {
+    float: right;
+    margin: -10px -20px;
+    font-size: 2.2rem;
+}
+
+/* Changes color of close button when mouse hovers over it */
+#modalContent #close:hover {
+    color: var(--placeholderColor);
+    cursor: pointer;
+}
+
+/* Elements within settings popup, sets styling */
+#modalContent h1 {
+    margin: 0px;
+    margin-bottom: 20px;
+    text-align: center;
+    font-size: 2.2rem;
+}
+
+#modalContent h2 {
+    margin: 15px 0px;
+    font-size: 1.5rem;
+}
+
+/* Slider, sets styling */
+#modalContent #slider {
+    appearance: none;
+    width: 100%;
+    height: 10px;
+    border-radius: 5px;  
+    background: var(--txtColor);
+}
+
+/* Slider thumb, sets styling */
+#modalContent #slider::-webkit-slider-thumb {
+    appearance: none;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%; 
+    background: var(--bgColor);
+    cursor: pointer;
+}
+
+/* Toggle animations row, positions text on left and toggle on right */
+#modalContent #toggleAnimations, #modalContent #langChoice, #modalContent #sfxChoice, #modalContent #themeChoice {
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;  
+}
+
+/* Toggle button, sets styling, colors and animation */
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+  }
+  
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+  
+.sliderRound {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 34px;
+    background-color: #D82915;
+    -webkit-transition: var(--time);
+    transition: var(--time);
+}
+  
+.sliderRound:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    border-radius: 50%;
+    background-color: white;
+    -webkit-transition: var(--time);
+    transition: var(--time);
+}
+  
+input:checked + .sliderRound {
+    background-color: #5CDB59;
+}
+  
+input:focus + .sliderRound {
+    box-shadow: 0 0 1px #5CDB59;
+}
+  
+input:checked + .sliderRound:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+}
+
+/* Dropdown Button */
+.dropbtn {
+    background-color: var(--dropdownColor);
+    color: var(--txtColor);
+    padding: 12px;
+    border-width: 0px;
+    border-radius: 10px;
+    font-size: 1.5rem;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    cursor: pointer;
+    transform: scaleX(var(--arabic));
+}
+  
+/* Dropdown button on hover & focus */
+.dropbtn:hover, .dropbtn:focus {
+    background-color: var(--btnHover);
+}
+  
+/* The container <div> - needed to position the dropdown content */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+  
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
+    right: 0px;
+    display: none;
+    position: absolute;
+    background-color: var(--dropdownColor);
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    max-height:200px;
+    overflow-y:scroll; 
+}
+  
+/* Links inside the dropdown */
+.dropdown-content a {
+    color: var(--txtColor);
+    font-size: 1rem;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    width: 120px;
+    transform: scaleX(var(--arabic));
+}
+
+#langDropdownContent a {
+    width: 200px;
+}
+  
+/* Change color of dropdown links on hover */
+.dropdown-content a:hover {background-color: var(--btnHover);}
+  
+/* Show the dropdown menu (use JS to add this class to the .dropdown-content container when 
+the user clicks on the dropdown button) */
+.show {display:block;}
+
+/* Displays and hide elements for the main menu */
+.titleText {
+    display: block;
+}
+
+#codeText {
+    display: none;
+}
+
+.menuButton {
+    display: block;
+}
+
+.codeButton {
+    display: none;
+}
+
+.nameButton {
+    display: none;
+}

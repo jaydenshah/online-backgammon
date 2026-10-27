@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<head>
+    <!-- Website title + importing CSS files -->
+    <title data-i18n="onlineBackgammon">Online Backgammon</title>
+    <link rel="stylesheet" href="static/styles.css">
+</head>
+<body>
+
+    <div id="title">
+        <!-- Settings button -->
+        <button id="settings">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                <!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
+                <path d="M352 320c88.4 0 160-71.6 160-160c0-15.3-2.2-30.1-6.2-44.2c-3.1-10.8-16.4-13.2-24.3-5.3l-76.8 76.8c-3 3-7.1 4.7-11.3 4.7L336 192c-8.8 0-16-7.2-16-16l0-57.4c0-4.2 1.7-8.3 4.7-11.3l76.8-76.8c7.9-7.9 5.4-21.2-5.3-24.3C382.1 2.2 367.3 0 352 0C263.6 0 192 71.6 192 160c0 19.1 3.4 37.5 9.5 54.5L19.9 396.1C7.2 408.8 0 426.1 0 444.1C0 481.6 30.4 512 67.9 512c18 0 35.3-7.2 48-19.9L297.5 310.5c17 6.2 35.4 9.5 54.5 9.5zM80 408a24 24 0 1 1 0 48 24 24 0 1 1 0-48z"/>
+            </svg>
+        </button>
+
+        <!-- Title -->
+        <h1 class="titleText" data-i18n="online"></h1>
+        <h1 class="titleText" data-i18n="backgammon"></h1>
+
+        <!-- Text that tells you the room code -->
+        <div id="codeText" style="margin-bottom: -100px; text-align: center; white-space: nowrap;">
+            <h1 style="font-size:3rem;" data-i18n="yourCodeIs"></h1>
+            <h1 id="code">------</h1>
+            <h1 style="font-size:3rem;" data-i18n="waitForJoin">Waiting for someone to join...</h1>
+        </div>
+    </div>
+
+    <div id="buttons">
+        <!-- Inputs on main menu -->
+        <input class="menuButton button" id="menuCreate" type="button" data-i18n="createAGame">
+        <input class="menuButton button" id="menuJoin" type="button" data-i18n="joinAGame">
+
+        <!-- Inputs when typing in a code  -->
+        <input class="codeButton text" id="codeInput" type="text" data-i18n="enterCode">
+        <input class="codeButton button" id="codeSubmit" type="button" data-i18n="enter">
+
+        <!-- Inputs when typing in username -->
+        <input class="nameButton text" id="nameInput" type="text" data-i18n="enterUsername">
+        <input class="nameButton button" id="nameSubmit" type="button" data-i18n="play">
+
+        <!-- Back button -->
+        <input class="button" type="button" data-i18n="back" id="back">
+        <div id="errorBanner"><span id="errorText">Room code doesn't exist. Please check and try again.</span></div>
+    </div>
+
+    <!-- Settings popup -->
+    <div id="modal">
+        <div id="modalContent">
+            <span id="close">&times</span>
+            <h1 data-i18n="settings"></h1>
+            
+            <!-- Language dropdown -->
+            <div id="langChoice">
+                <h2 data-i18n="language"></h2>
+                <div class="dropdown">
+                    <button onclick="openDropdown('langDropdown')" class="dropbtn" id="langDropdown">English (United Kingdom)</button>
+                    <div id="langDropdownContent" class="dropdown-content">
+                        <a id="english" onclick="changeLanguage('en')">English (United Kingdom)</a>
+                        <a id="australian" onclick="changeLanguage('au')">English (Australia)</a>
+                        <a id="spanish" onclick="changeLanguage('es')">Español</a>
+                        <a id="french" onclick="changeLanguage('fr')">Français</a>
+                        <a id="german" onclick="changeLanguage('de')">Deutsch</a>
+                        <a id="arabic" onclick="changeLanguage('ar')">العربية</a>
+                        <a id="japanese" onclick="changeLanguage('ja')">日本語</a>
+                        <a id="hebrew" onclick="changeLanguage('he')">עברית</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Theme dropdown -->
+            <div id="themeChoice">
+                <h2 data-i18n="theme"></h2>
+                <div class="dropdown">
+                    <button onclick="openDropdown('themeDropdown')" class="dropbtn" id="themeDropdown">Dark</button>
+                    <div id="themeDropdownContent" class="dropdown-content">
+                        <a id="dark">Dark</a>
+                        <a id="light">Light</a>
+                        <a id="pink">Pink</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SFX dropdown -->
+            <div id="sfxChoice">
+                <h2 data-i18n="sfx"></h2>
+                <div class="dropdown">
+                    <button onclick="openDropdown('sfxDropdown')" class="dropbtn" id="sfxDropdown">SFX 1</button>
+                    <div id="sfxDropdownContent" class="dropdown-content">
+                        <a id="sfx1">SFX 1</a>
+                        <a id="sfx2">SFX 2</a>
+                        <a id="sfx3">SFX 3</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SFX slider -->
+            <h2 data-i18n="sfxVolume"></h2>
+            <input type="range" min="0" max="100" value="100" id="slider">
+
+            <!-- Animation setting -->
+            <div id="toggleAnimations">
+                <h2 data-i18n="animations"></h2>
+                <label class="switch">
+                    <input id="toggleAnimation" type="checkbox" checked>
+                    <span class="sliderRound"></span>
+                </label>
+            </div>
+        </div>
+    </div>
+
+    <!-- Importing Javascript files -->
+    <script src="https://cdn.socket.io/4.7.5/socket.io.min.js" 
+    integrity="sha384-2huaZvOR9iDzHqslqwpR87isEmrfxqyWOF7hr7BY6KG0+hVKLoEXMPUJw3ynWuhO" 
+    crossorigin="anonymous"></script>
+    <script src="static/menu.js"></script>
+    <script src="static/appearance.js"></script>
+    <script src="static/settings.js"></script>
+</body>
+</html>
